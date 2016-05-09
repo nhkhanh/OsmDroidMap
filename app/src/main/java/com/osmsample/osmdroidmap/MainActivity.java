@@ -3,6 +3,7 @@ package com.osmsample.osmdroidmap;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
             checkPermissions();
         }
 
+        double lat = 10.823099;
+        double lng = 106.629664;
 
         MapView map = (MapView) findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
@@ -42,8 +47,18 @@ public class MainActivity extends AppCompatActivity {
         map.setTilesScaledToDpi(true);
         IMapController mapController = map.getController();
         mapController.setZoom(15);
-        GeoPoint startPoint = new GeoPoint(10.823099, 106.629664);
+        GeoPoint startPoint = new GeoPoint(lat, lng);
         mapController.setCenter(startPoint);
+
+        Drawable marker = getResources().getDrawable(R.drawable.ic_marker);
+        List<Overlay> mapOverlays = map.getOverlays();
+        CustomOverLay overlays = new CustomOverLay(getBaseContext(), marker, map);
+
+        GeoPoint p = new GeoPoint(lat, lng);
+        OverlayItem overlayItem = new OverlayItem("aaaaa", "bbbbb", p);
+        overlays.addOverlayItem(overlayItem);
+
+        mapOverlays.add(overlays);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
