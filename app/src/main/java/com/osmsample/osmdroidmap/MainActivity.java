@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import org.osmdroid.api.IMapController;
+import org.osmdroid.events.MapListener;
+import org.osmdroid.events.ScrollEvent;
+import org.osmdroid.events.ZoomEvent;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -59,6 +62,18 @@ public class MainActivity extends AppCompatActivity {
         overlays.addOverlayItem(overlayItem);
 
         mapOverlays.add(overlays);
+
+        map.setMapListener(new MapListener() {
+            public boolean onZoom(ZoomEvent arg0) {
+                //TODO
+                return false;
+            }
+
+            public boolean onScroll(ScrollEvent arg0) {
+                //onExtentChange();
+                return false;
+            }
+        } );
     }
 
     @TargetApi(Build.VERSION_CODES.M)
