@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
 //        map.setBuiltInZoomControls(true);
         map.setMultiTouchControls(true);
         map.setTilesScaledToDpi(true);
-//        IMapController mapController = map.getController();
-//        mapController.setZoom(9);
-//        GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
-//        mapController.setCenter(startPoint);
+        IMapController mapController = map.getController();
+        mapController.setZoom(15);
+        GeoPoint startPoint = new GeoPoint(10.823099, 106.629664);
+        mapController.setCenter(startPoint);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
